@@ -50,6 +50,8 @@ module FakeBraintree
         'add_ons' => add_ons,
         'discounts' => discounts,
         'next_billing_date' => braintree_formatted_date(next_billing_date),
+        'paid_through_date' => braintree_formatted_date(paid_through_date),
+        'first_billing_date' => braintree_formatted_date(first_billing_date),
         'billing_day_of_month' => billing_day_of_month,
         'billing_period_start_date' => braintree_formatted_date(billing_period_start_date),
         'billing_period_end_date' => braintree_formatted_date(billing_period_end_date)
@@ -119,6 +121,14 @@ module FakeBraintree
 
     def billing_period_start_date
       @billing_period_start_date ||= Date.today
+    end
+
+    def first_billing_date
+      billing_period_start_date
+    end
+
+    def paid_through_date
+      billing_period_end_date
     end
 
     def billing_period_end_date
